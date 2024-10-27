@@ -94,7 +94,6 @@ class _RegistrationStep1State extends State<RegistrationStep1> {
   }
 }
 
-
 class RegistrationStep2 extends StatelessWidget {
   final VoidCallback onFinish;
 
@@ -132,6 +131,3 @@ class RegistrationStep2 extends StatelessWidget {
     );
   }
 }
-
-
-

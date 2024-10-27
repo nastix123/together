@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -18,10 +16,9 @@ class WelcomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-      
             Center(
               child: Image.asset(
-                'assets/images/logo.png', 
+                'assets/images/logo.png',
                 height: 100,
               ),
             ),
@@ -33,7 +30,6 @@ class WelcomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 30),
-            
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/volunteer-registration');
@@ -41,8 +37,6 @@ class WelcomeScreen extends StatelessWidget {
               child: const Text("Регистрация волонтера"),
             ),
             const SizedBox(height: 10),
-            
-
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/needy-registration');
@@ -50,7 +44,6 @@ class WelcomeScreen extends StatelessWidget {
               child: const Text("Регистрация нуждающегося"),
             ),
             const SizedBox(height: 10),
-            
             OutlinedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/login');
@@ -58,7 +51,6 @@ class WelcomeScreen extends StatelessWidget {
               child: const Text("Вход в аккаунт"),
             ),
             const SizedBox(height: 20),
-            
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/contacts');

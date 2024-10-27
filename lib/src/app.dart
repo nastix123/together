@@ -7,6 +7,7 @@ import 'settings/settings_controller.dart';
 import '../src/registration/main_registration_screen.dart';
 import '../src/registration/choose_role_view.dart';
 import '../src/registration/needy_registration_view.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
@@ -18,7 +19,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      
       listenable: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale('en', ''), 
+            Locale('en', ''),
           ],
           onGenerateTitle: (BuildContext context) =>
               AppLocalizations.of(context)!.appTitle,
@@ -58,4 +58,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
