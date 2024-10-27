@@ -3,9 +3,13 @@ name: Flutter
 on:
   push:
     branches: [ "main" ]
-
+    paths-ignore:
+      - 'README.md'
+      
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - 'README.md'
 
 jobs:
   flutter_job:
