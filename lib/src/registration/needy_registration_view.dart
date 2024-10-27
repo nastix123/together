@@ -1,11 +1,8 @@
-
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 
 class RegistrationNeedyStep1 extends StatefulWidget {
-
-
   final VoidCallback onNext;
 
   const RegistrationNeedyStep1({required this.onNext});
@@ -99,8 +96,6 @@ class _RegistrationNeedyStep1State extends State<RegistrationNeedyStep1> {
   }
 }
 
-
-
 class RegistrationNeedyStep2 extends StatefulWidget {
   final VoidCallback onFinish;
 
@@ -151,19 +146,18 @@ class _RegistrationNeedyStep2State extends State<RegistrationNeedyStep2> {
               keyboardType: TextInputType.datetime,
             ),
             const SizedBox(height: 20),
-
             ElevatedButton.icon(
               onPressed: _pickDocument,
               icon: const Icon(Icons.upload_file),
               label: const Text('Загрузить документ'),
             ),
-
             const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: _selectedDocuments.length,
                 itemBuilder: (context, index) {
-                  final fileName = _selectedDocuments[index].path.split('/').last;
+                  final fileName =
+                      _selectedDocuments[index].path.split('/').last;
                   return ListTile(
                     leading: const Icon(Icons.insert_drive_file),
                     title: Text(fileName),
@@ -179,7 +173,6 @@ class _RegistrationNeedyStep2State extends State<RegistrationNeedyStep2> {
                 },
               ),
             ),
-
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: widget.onFinish,
@@ -193,9 +186,8 @@ class _RegistrationNeedyStep2State extends State<RegistrationNeedyStep2> {
 }
 
 class NeedyRegistrationScreen extends StatelessWidget {
-    static const routeName = "/needy-registration";
+  static const routeName = "/needy-registration";
 
-  
   @override
   Widget build(BuildContext context) {
     return RegistrationNeedyStep1(

@@ -22,5 +22,3 @@ class VolunteerRegistrationScreen extends StatelessWidget {
     );
   }
 }
-
-
