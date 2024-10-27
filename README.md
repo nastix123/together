@@ -1,7 +1,5 @@
 # Together
 
-A new Flutter project.
-
 ## Description
 
 Our application is designed to connect volunteers with people in need, creating a seamless, secure, and user-friendly platform.
