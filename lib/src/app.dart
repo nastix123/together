@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
+import 'package:together/src/presentation/announcement/announcements.dart';
+import 'package:together/src/presentation/create_announcement/create_announcement.dart';
+import 'package:together/src/presentation/registration/ui/registration.dart';
+import 'package:together/src/presentation/registration/ui/splash.dart';
 import 'settings/settings_controller.dart';
 
-import '../src/registration/main_registration_screen.dart';
-import '../src/registration/choose_role_view.dart';
-import '../src/registration/needy_registration_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -38,23 +38,15 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
-          onGenerateRoute: (RouteSettings routeSettings) {
-            return MaterialPageRoute<void>(
-              settings: routeSettings,
-              builder: (BuildContext context) {
-                switch (routeSettings.name) {
-                  case VolunteerRegistrationScreen.routeName:
-                    return VolunteerRegistrationScreen();
-                  case NeedyRegistrationScreen.routeName:
-                    return NeedyRegistrationScreen();
-                  default:
-                    return const WelcomeScreen();
-                }
-              },
-            );
-          },
+          home: const SplashScreen(),
+          routes: {
+            '/register': (context) => RegistrationScreen(),
+            '/announcements': (context) => const AnnouncementsScreen(),
+            '/create_announcement': (context) => const CreateAnnouncementScreen()
+        },
         );
       },
     );
   }
 }
+
