@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16.1
+    container_name: together_postgres
+    restart: always
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - main
+
+  auth:
+    build: .
+    container_name: together_auth
+    restart: always
+    ports:
+      - "8585:8001"
+    env_file:
+      - .env
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
+    depends_on:
+      - postgres
+    volumes:
+      - .:/opt/app/
+    networks:
+      - main
+
+
+networks:
+  main:
+
+volumes:
+  db:
+  minio_storage:

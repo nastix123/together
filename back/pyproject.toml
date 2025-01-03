@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "together-auth"
+version = "0.1.0"
+description = ""
+authors = ["benya <baronin.sv@intechs.by>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+djangorestframework = "^3.14.0"
+djoser = "^2.2.2"
+psycopg2-binary = "2.9.9"
+django = "^5.0.1"
+django-environ = "^0.11.2"
+drf-spectacular = "^0.27.1"
+django-filter = "^23.5"
+djangorestframework-simplejwt = "^5.3.1"
+gunicorn = "^21.2.0"
+drf-standardized-errors = "^0.13.0"
+ruff = "^0.5.4"
+pre-commit = "^3.7.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+    "D",
+    "PT"
+]
+exclude = [
+    '__init__.py',
+    'tests',
+]
+ignore = [
+    "E501",
+    "D100",
+    "D101",
+    "D102",
+    "D106",
+    "D103",
+    "D107",
+    "B904",
+    "D105",
+]

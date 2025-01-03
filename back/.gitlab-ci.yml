@@ -1,0 +1,4 @@
+include:
+  - project: 'its/common/gitlab/ci/docker/python'
+    ref: main
+    file: 'variations/docker-python-ci.yml'

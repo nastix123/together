@@ -1,0 +1,365 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-01 08:44+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: apps/authentication/apps.py:8
+msgid "Authentication"
+msgstr "Аутентификация"
+
+#: apps/authentication/models.py:38
+msgid "first_name"
+msgstr "имя"
+
+#: apps/authentication/models.py:41
+msgid "last_name"
+msgstr "фамилия"
+
+#: apps/authentication/models.py:47
+msgid "middle_name"
+msgstr "отчество"
+
+#: apps/authentication/models.py:53
+msgid "email"
+msgstr "электронная почта"
+
+#: apps/authentication/models.py:60
+msgid "phone"
+msgstr "телефон"
+
+#: apps/authentication/models.py:67
+msgid "appointment"
+msgstr "назначение"
+
+#: apps/authentication/models.py:73
+msgid "job_title"
+msgstr "должность"
+
+#: apps/authentication/models.py:100
+msgid "user"
+msgstr "пользователь"
+
+#: apps/authentication/models.py:101
+msgid "users"
+msgstr "пользователи"
+
+#: apps/authentication/permissions.py:6
+msgid "Can view User list"
+msgstr "Может просматривать список пользователей"
+
+#: apps/authentication/permissions.py:7
+msgid "Can add User"
+msgstr "Может добавлять пользователей"
+
+#: apps/authentication/permissions.py:8
+msgid "Can change User"
+msgstr "Может изменять пользователей"
+
+#: apps/authentication/permissions.py:9
+msgid "Can delete User"
+msgstr "Может удалять пользователей"
+
+#: apps/authentication/permissions.py:10
+msgid "Can reset password"
+msgstr "Может сбросить пароль"
+
+#: apps/authentication/permissions.py:14
+msgid "Can add permission"
+msgstr "Может добавлять разрешения"
+
+#: apps/authentication/permissions.py:15
+msgid "Can change permission"
+msgstr "Может изменять разрешения"
+
+#: apps/authentication/permissions.py:16
+msgid "Can delete permission"
+msgstr "Может удалять разрешения"
+
+#: apps/authentication/permissions.py:17
+msgid "Can view permission"
+msgstr "Может просматривать разрешения"
+
+#: apps/authentication/permissions.py:21
+msgid "Can add group"
+msgstr "Может добавлять группы"
+
+#: apps/authentication/permissions.py:22
+msgid "Can change group"
+msgstr "Может изменять группы"
+
+#: apps/authentication/permissions.py:23
+msgid "Can delete group"
+msgstr "Может удалять группы"
+
+#: apps/authentication/permissions.py:24
+msgid "Can view group"
+msgstr "Может просматривать группы"
+
+#: apps/authentication/permissions.py:25
+msgid "Can set users"
+msgstr "Может устанавливать пользователей"
+
+#: apps/authentication/permissions.py:26
+msgid "Can get group users"
+msgstr "Может получать пользователей группы"
+
+#: apps/authentication/permissions.py:27
+msgid "Can get only group"
+msgstr "Может получать только группу"
+
+#: apps/passport_templates/apps.py:8 apps/passport_templates/models.py:68
+msgid "passport templates"
+msgstr "шаблоны паспортов"
+
+#: apps/passport_templates/models.py:14
+#, fuzzy
+#| msgid "passports template name"
+msgid "passports category template name"
+msgstr "название шаблона паспорта"
+
+#: apps/passport_templates/models.py:22
+#, fuzzy
+#| msgid "passport template parent class name"
+msgid "passport template folder parent class name"
+msgstr "имя родительского класса шаблона паспорта"
+
+#: apps/passport_templates/models.py:34
+#, fuzzy
+#| msgid "passport template"
+msgid "passport template folder"
+msgstr "шаблон паспорта"
+
+#: apps/passport_templates/models.py:35
+#, fuzzy
+#| msgid "passport templates"
+msgid "passport templates folders"
+msgstr "шаблоны паспортов"
+
+#: apps/passport_templates/models.py:42
+msgid "passports template name"
+msgstr "название шаблона паспорта"
+
+#: apps/passport_templates/models.py:47
+msgid "passports template attribute"
+msgstr "атрибут шаблона паспорта"
+
+#: apps/passport_templates/models.py:52
+msgid "passports template attribute type"
+msgstr "тип атрибута шаблона паспорта"
+
+#: apps/passport_templates/models.py:58
+#, fuzzy
+#| msgid "passports template name"
+msgid "passports template folder"
+msgstr "название шаблона паспорта"
+
+#: apps/passport_templates/models.py:67
+msgid "passport template"
+msgstr "шаблон паспорта"
+
+#: apps/passport_templates/models.py:77
+#, fuzzy
+#| msgid "passport template"
+msgid "a draft of the user's passport template"
+msgstr "шаблон паспорта"
+
+#: apps/passport_templates/models.py:81
+#, fuzzy
+#| msgid "passports template name"
+msgid "draft passports template name"
+msgstr "название шаблона паспорта"
+
+#: apps/passport_templates/models.py:86
+#, fuzzy
+#| msgid "passports template attribute"
+msgid "draft passports template attribute"
+msgstr "атрибут шаблона паспорта"
+
+#: apps/passport_templates/models.py:91
+#, fuzzy
+#| msgid "passports template attribute type"
+msgid "draft passports template attribute type"
+msgstr "тип атрибута шаблона паспорта"
+
+#: apps/passport_templates/models.py:97
+#, fuzzy
+#| msgid "passport template"
+msgid "draft passports template"
+msgstr "шаблон паспорта"
+
+#: apps/passport_templates/models.py:106
+#, fuzzy
+#| msgid "passport template"
+msgid "draft passport template"
+msgstr "шаблон паспорта"
+
+#: apps/passport_templates/models.py:107
+#, fuzzy
+#| msgid "passport templates"
+msgid "draft passport templates"
+msgstr "шаблоны паспортов"
+
+#: apps/reference/apps.py:8
+msgid "reference"
+msgstr "ссылка"
+
+#: apps/reference/models.py:10
+msgid "string"
+msgstr "строка"
+
+#: apps/reference/models.py:11
+msgid "UUID"
+msgstr "Уникальный идентификатор (UUID)"
+
+#: apps/reference/models.py:12
+msgid "boolean"
+msgstr "логическое значение"
+
+#: apps/reference/models.py:13
+msgid "decimal"
+msgstr "десятичное число"
+
+#: apps/reference/models.py:14
+msgid "positive integer"
+msgstr "положительное целое число"
+
+#: apps/reference/models.py:15
+msgid "integer"
+msgstr "целое число"
+
+#: apps/reference/models.py:16
+msgid "datetime"
+msgstr "дата и время"
+
+#: apps/reference/models.py:17
+msgid "date"
+msgstr "дата"
+
+#: apps/reference/models.py:21
+msgid "one to one"
+msgstr "один к одному"
+
+#: apps/reference/models.py:22
+msgid "one to none or one to one"
+msgstr "один к ни одному или один к одному"
+
+#: apps/reference/models.py:23
+msgid "one to none or one to many"
+msgstr "один к ни одному или один ко многим"
+
+#: apps/reference/models.py:24
+msgid "only one"
+msgstr "только один"
+
+#: apps/reference/models.py:25
+msgid "one to many"
+msgstr "один ко многим"
+
+#: apps/reference/models.py:32
+msgid "classes reference book description"
+msgstr "описание справочника классов"
+
+#: apps/reference/models.py:38
+msgid "class_name"
+msgstr "имя класса"
+
+#: apps/reference/models.py:43
+msgid "parent class_name"
+msgstr "имя родительского класса"
+
+#: apps/reference/models.py:51
+msgid "parent class"
+msgstr "родительский класс"
+
+#: apps/reference/models.py:64
+msgid "classes reference book"
+msgstr "справочник классов"
+
+#: apps/reference/models.py:65
+msgid "classes reference books"
+msgstr "справочники классов"
+
+#: apps/reference/models.py:72
+msgid "attributes reference book description"
+msgstr "описание справочника атрибутов"
+
+#: apps/reference/models.py:77
+msgid "attributes_name"
+msgstr "имя атрибута"
+
+#: apps/reference/models.py:83
+msgid "attributes class name"
+msgstr "имя класса атрибута"
+
+#: apps/reference/models.py:91
+msgid "attributes type"
+msgstr "тип атрибута"
+
+#: apps/reference/models.py:100
+msgid "attributes class reference book"
+msgstr "справочник классов атрибутов"
+
+#: apps/reference/models.py:101
+msgid "attributes class reference books"
+msgstr "справочники классов атрибутов"
+
+#: apps/reference/models.py:110
+msgid "class association reference book description"
+msgstr "описание справочника ассоциаций классов"
+
+#: apps/reference/models.py:116
+msgid "initial class name"
+msgstr "имя начального класса"
+
+#: apps/reference/models.py:123
+msgid "final class name"
+msgstr "имя конечного класса"
+
+#: apps/reference/models.py:129
+msgid "associations name"
+msgstr "имя ассоциации"
+
+#: apps/reference/models.py:136
+msgid "multiplicity"
+msgstr "множественность"
+
+#: apps/reference/models.py:145
+msgid "class associations reference book"
+msgstr "справочник ассоциаций классов"
+
+#: apps/reference/models.py:146
+msgid "class associations reference books"
+msgstr "справочники ассоциаций классов"
+
+#: core/conf/settings.py:107
+msgid "English"
+msgstr "Английский"
+
+#: core/conf/settings.py:108
+msgid "Russian"
+msgstr "Русский"
+
+#: core/constants.py:8
+msgid "Date created"
+msgstr "Дата создания"
+
+#: core/constants.py:10
+msgid "Date updated"
+msgstr "Дата обновления"
