@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:together/src/domain/announcement.dart';
+import 'package:together/src/model/announcement.dart';
 
 class CreateAnnouncementScreen extends StatefulWidget {
   final Announcement? announcement;
 
-  const CreateAnnouncementScreen({Key? key, this.announcement}) : super(key: key);
+  const CreateAnnouncementScreen({Key? key, this.announcement})
+      : super(key: key);
 
   @override
-  _CreateAnnouncementScreenState createState() => _CreateAnnouncementScreenState();
+  _CreateAnnouncementScreenState createState() =>
+      _CreateAnnouncementScreenState();
 }
 
 class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
@@ -76,7 +78,8 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                   controller: _taskController,
                   label: 'Задача',
                   hintText: 'Введите задачу',
-                  validator: (value) => value!.isEmpty ? 'Введите задачу' : null,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Введите задачу' : null,
                 ),
                 const SizedBox(height: 16),
                 _buildTextField(
@@ -101,13 +104,14 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                 Center(
                   child: ElevatedButton(
                     onPressed: _submitForm,
-                    child: const Text('Создать объявление'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 16),
                     ),
+                    child: const Text('Создать объявление'),
                   ),
                 ),
               ],
@@ -316,7 +320,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
         agePreference: _agePreference,
         ratingPreference: _ratingPreference,
         comments: _commentsController.text,
-        status: _status, 
+        status: _status,
         city: _addressController.text,
       );
       // Обработка сохранения нового объявления

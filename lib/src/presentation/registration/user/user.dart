@@ -28,11 +28,11 @@ class User {
     };
   }
 
-
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'] as String,
-      role: Role.values.firstWhere((e) => e.name == map['role'], orElse: () => Role.UNKNOWN),
+      role: Role.values
+          .firstWhere((e) => e.name == map['role'], orElse: () => Role.UNKNOWN),
       name: map['name'] as String,
       surname: map['surname'] as String,
       city: map['city'] as String,

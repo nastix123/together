@@ -7,7 +7,7 @@ import 'package:together/src/presentation/registration/ui/login.dart';
 import 'package:together/src/presentation/registration/user/user.dart';
 
 class MainScreen extends StatelessWidget {
-  final User? currentUser; 
+  final User? currentUser;
 
   const MainScreen({Key? key, required this.currentUser}) : super(key: key);
 
