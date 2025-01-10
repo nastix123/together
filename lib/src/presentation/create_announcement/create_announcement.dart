@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:together/src/domain/announcement.dart';
+import 'package:together/src/model/announcement.dart';
 
 class CreateAnnouncementScreen extends StatefulWidget {
   final Announcement? announcement;
@@ -101,13 +101,13 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                 Center(
                   child: ElevatedButton(
                     onPressed: _submitForm,
-                    child: const Text('Создать объявление'),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                     ),
+                    child: const Text('Создать объявление'),
                   ),
                 ),
               ],

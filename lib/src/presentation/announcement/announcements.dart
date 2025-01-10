@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:together/src/domain/announcement.dart';
+import 'package:together/src/model/announcement.dart';
 import 'package:together/src/presentation/announcement/announcement_details.dart';
 import 'package:intl/intl.dart';
 
