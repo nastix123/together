@@ -24,7 +24,7 @@ class Announcement {
     this.agePreference,
     this.ratingPreference,
     this.comments,
-     this.status = AnnouncementStatus.newStatus,
+    this.status = AnnouncementStatus.newStatus,
   });
 
   String formatTime(TimeOfDay? time, BuildContext context) {

@@ -60,12 +60,11 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
     super.dispose();
   }
 
-
   void _filterAnnouncements() {
     String query = _searchController.text.toLowerCase();
     setState(() {
       filteredAnnouncements = announcements.where((announcement) {
-        return announcement.task.toLowerCase().contains(query); 
+        return announcement.task.toLowerCase().contains(query);
       }).toList();
     });
   }
@@ -92,7 +91,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
     );
   }
 
-
   Widget _buildSearchBar() {
     return TextField(
       controller: _searchController,
@@ -107,7 +105,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
       ),
     );
   }
-
 
   Widget _buildActionButtons() {
     return Row(
@@ -136,7 +133,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
       ],
     );
   }
-
 
   Widget _buildAnnouncementsList() {
     return Expanded(
@@ -171,7 +167,8 @@ class AnnouncementCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AnnouncementDetailScreen(announcement: announcement),
+            builder: (context) =>
+                AnnouncementDetailScreen(announcement: announcement),
           ),
         );
       },
@@ -260,7 +257,6 @@ class AnnouncementCard extends StatelessWidget {
     );
   }
 
-  
   Widget _buildDescription() {
     return Text(
       announcement.task,

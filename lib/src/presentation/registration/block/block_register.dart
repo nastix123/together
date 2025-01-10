@@ -4,7 +4,6 @@ import 'package:together/src/model/user.dart';
 import 'package:together/src/network/network_service.dart';
 import 'package:together/src/utils/exceptions/form_exceptions.dart';
 
-
 part 'register_event.dart';
 part 'register_state.dart';
 

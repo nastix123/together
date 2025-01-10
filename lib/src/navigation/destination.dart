@@ -1,4 +1,10 @@
-enum Destination { welcome, volunteerRegistration, needyRegistration, volunteerDashboard, needyDashboard }
+enum Destination {
+  welcome,
+  volunteerRegistration,
+  needyRegistration,
+  volunteerDashboard,
+  needyDashboard
+}
 
 extension DestinationExtension on Destination {
   String get route {
@@ -6,7 +12,8 @@ extension DestinationExtension on Destination {
       case Destination.welcome:
         return '/welcome';
       case Destination.volunteerRegistration:
-        return '/registration';;
+        return '/registration';
+        ;
       case Destination.volunteerDashboard:
         return '/volunteer-dashboard';
       case Destination.needyDashboard:

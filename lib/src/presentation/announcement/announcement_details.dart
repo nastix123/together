@@ -12,7 +12,7 @@ class AnnouncementDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Детали объявления',
-          style: TextStyle(fontSize: 22), 
+          style: TextStyle(fontSize: 22),
         ),
         backgroundColor: Colors.blueAccent,
       ),
@@ -36,25 +36,25 @@ class AnnouncementDetailScreen extends StatelessWidget {
     );
   }
 
-
   Widget _buildTask() {
     return Text(
       announcement.task,
-      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+      style: const TextStyle(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueAccent),
     );
   }
-
 
   Widget _buildDateAndAddress() {
     return Row(
       children: [
-        _buildChip(label: 'Дата: ${announcement.desiredDate.toLocal().toString().split(' ')[0]}'),
+        _buildChip(
+            label:
+                'Дата: ${announcement.desiredDate.toLocal().toString().split(' ')[0]}'),
         const SizedBox(width: 16),
         _buildChip(label: 'Адрес: ${announcement.address}'),
       ],
     );
   }
-
 
   Widget _buildChip({required String label}) {
     return Chip(
@@ -66,7 +66,6 @@ class AnnouncementDetailScreen extends StatelessWidget {
     );
   }
 
-  
   Widget _buildPreferences() {
     final preferences = [
       'Пол: ${announcement.genderPreference}',
@@ -75,13 +74,15 @@ class AnnouncementDetailScreen extends StatelessWidget {
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: preferences.map((pref) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4.0),
-        child: Text(
-          pref,
-          style: const TextStyle(fontSize: 16, color: Colors.black54),
-        ),
-      )).toList(),
+      children: preferences
+          .map((pref) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Text(
+                  pref,
+                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                ),
+              ))
+          .toList(),
     );
   }
 
@@ -97,14 +98,13 @@ class AnnouncementDetailScreen extends StatelessWidget {
   Widget _buildStartButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-      
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const WorkStartScreen()),
         );
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blueAccent, 
+        backgroundColor: Colors.blueAccent,
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
@@ -118,13 +118,9 @@ class AnnouncementDetailScreen extends StatelessWidget {
 
 class WorkStartScreen extends StatelessWidget {
   const WorkStartScreen();
-  
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body:Card(
-        child: Text("Start Wotk")
-      )
-    );
+    return const Scaffold(body: Card(child: Text("Start Wotk")));
   }
 }

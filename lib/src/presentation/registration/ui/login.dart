@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -39,9 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscureText
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
                       ),
                       onPressed: () {
                         setState(() {
@@ -55,17 +54,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {
-                    
-                    },
+                    onPressed: () {},
                     child: Text('Забыли пароль?'),
                   ),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {
-                 
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     minimumSize: Size(double.infinity, 48),

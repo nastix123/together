@@ -11,7 +11,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool _agreeToTerms = false;
   bool _obscurePassword = true;
 
- 
   String? _validatePhone(String? value) {
     final phonePattern = RegExp(r'^\+375\d{9}$');
     if (!phonePattern.hasMatch(value ?? '')) {
@@ -19,7 +18,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     }
     return null;
   }
-
 
   String? _validateEmail(String? value) {
     final emailPattern = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -69,7 +67,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-           
+
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Фамилия',
@@ -85,7 +83,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-          
+
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Номер телефона',
@@ -97,7 +95,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   validator: _validatePhone,
                 ),
                 const SizedBox(height: 16),
-          
+
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Адрес',
@@ -113,7 +111,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-              
+
                 DropdownButtonFormField<String>(
                   value: _selectedRole,
                   onChanged: (value) {
@@ -189,7 +187,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-             
+
                 Row(
                   children: [
                     Checkbox(
@@ -209,25 +207,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-             
+
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate() && _agreeToTerms) {
-                
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Регистрация успешна')),
                       );
                       if (_selectedRole == "volunteer") {
                         Navigator.pushNamed(context, '/announcements');
-                      } else if ( _selectedRole == "needy") {
+                      } else if (_selectedRole == "needy") {
                         Navigator.pushNamed(context, '/create_announcement');
                       }
-
                     } else if (!_agreeToTerms) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Вы должны согласиться с условиями')),
-                      ); 
-                    } 
+                        SnackBar(
+                            content: Text('Вы должны согласиться с условиями')),
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 48),
