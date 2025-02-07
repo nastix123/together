@@ -48,7 +48,7 @@ class UserLoginView(viewsets.ViewSet):
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-
+        print("180 * " * 180)
         username = serializer.validated_data.get('username')
         email = serializer.validated_data.get('email')
         password = serializer.validated_data.get('password')

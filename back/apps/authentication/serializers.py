@@ -37,6 +37,7 @@ class UserLoginSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True)
 
     def validate(self, data):
+        print(180 * ")))")
         if not data.get('username') and not data.get('email'):
             raise serializers.ValidationError("Either username or email is required.")
         if not data.get('password'):

@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_standardized_errors",
     #
-    "apps.authentication",
+    'apps.authentication.AuthenticationConfig',
 ]
 
 MIDDLEWARE = [
