@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User, Request, Response
+from .models import User, RequestModel, ResponseModel
+
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,12 +19,12 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Request
+        model = RequestModel
         fields = '__all__'
         read_only_fields = ('author', 'created_at')
 
 class ResponseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Response
+        model = ResponseModel
         fields = '__all__'
         read_only_fields = ('volunteer', 'created_at')

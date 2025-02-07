@@ -1,5 +1,6 @@
 from rest_framework import viewsets, permissions
-from .models import Request, Response
+
+from .models import RequestModel, ResponseModel
 from .serializers import RequestSerializer, ResponseSerializer
 from .permissions import IsNeedy, IsVolunteer
 
@@ -9,7 +10,7 @@ from rest_framework import status
 from .serializers import UserRegistrationSerializer
 class RequestViewSet(viewsets.ModelViewSet):
 
-    queryset = Request.objects.all()
+    queryset = RequestModel.objects.all()
     serializer_class = RequestSerializer
     permission_classes = [permissions.IsAuthenticated, IsNeedy]
 
@@ -17,7 +18,7 @@ class RequestViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 class ResponseViewSet(viewsets.ModelViewSet):
-    queryset = Response.objects.all()
+    queryset = ResponseModel.objects.all()
     serializer_class = ResponseSerializer
     permission_classes = [permissions.IsAuthenticated, IsVolunteer]
 

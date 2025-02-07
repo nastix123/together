@@ -508,6 +508,17 @@ release = ["flit", "keyring", "tbump"]
 test = ["tox", "tox-gh-actions"]
 
 [[package]]
+name = "environ"
+version = "1.0"
+description = "Stack Based Globals Management"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "environ-1.0.tar.gz", hash = "sha256:4df7f1dfeb7d1c988d2e19a8bd5d547a526e0400aeb35adf732032472f35dcb0"},
+]
+
+[[package]]
 name = "et-xmlfile"
 version = "2.0.0"
 description = "An implementation of lxml.xmlfile for the standard library"
@@ -1144,4 +1155,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10.12"
-content-hash = "efe7948260a8baf6fc38f7124ba107a723678fa2f11ba3c80517521be0124c1e"
+content-hash = "e72104609b9c504b56952a8604dc1212d9db8d20b87d8fc00e40ff0d2408f274"

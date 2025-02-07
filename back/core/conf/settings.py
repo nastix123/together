@@ -1,17 +1,16 @@
 import os
+import environ
 from pathlib import Path
-
 from django.utils.translation import gettext_lazy as _
 
-from core.env import env
+env = environ.Env(DEBUG=(bool, False))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR.parent, ".env"))
 
 SECRET_KEY = env("DJANGO_SECRET_KEY")
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DJANGO_DEBUG")
-
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+DEBUG = env.bool("DJANGO_DEBUG", default=False)
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
 
 # Application definition
 

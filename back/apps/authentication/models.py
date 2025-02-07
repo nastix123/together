@@ -20,7 +20,7 @@ class User(AbstractUser):
             raise ValidationError("At least one of username, email or phone must be set.")
 
 
-class Request(models.Model):
+class RequestModel(models.Model):
     STATUS_CHOICES = (
         ('open', 'Open'),
         ('in_progress', 'In Progress'),
@@ -33,8 +33,8 @@ class Request(models.Model):
     status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='open')
 
 
-class Response(models.Model):
-    request = models.ForeignKey(Request, on_delete=models.CASCADE, related_name='responses')
+class ResponseModel(models.Model):
+    request = models.ForeignKey(RequestModel, on_delete=models.CASCADE, related_name='responses')
     volunteer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='responses')
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

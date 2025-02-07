@@ -20,6 +20,7 @@ django-wkhtmltopdf = "^3.4.0"
 django-mptt = "^0.16.0"
 openpyxl = "^3.1.2"
 drf-standardized-errors = "^0.13.0"
+environ = "^1.0"
 
 [build-system]
 requires = ["poetry-core"]
