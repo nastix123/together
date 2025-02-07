@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User, RequestModel, ResponseModel
+from django.contrib.auth import authenticate
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -28,3 +29,21 @@ class ResponseSerializer(serializers.ModelSerializer):
         model = ResponseModel
         fields = '__all__'
         read_only_fields = ('volunteer', 'created_at')
+
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=False)
+    email = serializers.EmailField(required=False)
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        if not data.get('username') and not data.get('email'):
+            raise serializers.ValidationError("Either username or email is required.")
+        if not data.get('password'):
+            raise serializers.ValidationError("Password is required.")
+        return data
+
+    def create(self, validated_data):
+        user = authenticate(**validated_data)
+        if user is None:
+            raise serializers.ValidationError("Invalid credentials.")
+        return user

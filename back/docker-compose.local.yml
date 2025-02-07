@@ -1,18 +1,19 @@
 version: "3.9"
 
 services:
-  postgres:
-    image: postgres:16.1
-    container_name: together_postgres
+  mysql:
+    image: mysql:8.0
+    container_name: together_mysql
     restart: always
     ports:
-      - "5435:5432"
+      - "3307:3306"
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - MYSQL_DATABASE=together_db
+      - MYSQL_USER=together
+      - MYSQL_PASSWORD=together
+      - MYSQL_ROOT_PASSWORD=together
     volumes:
-      - db:/var/lib/postgresql/data
+      - db:/var/lib/mysql
     networks:
       - main
 
@@ -26,12 +27,11 @@ services:
       - .env
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
     depends_on:
-      - postgres
+      - mysql
     volumes:
       - .:/opt/app/
     networks:
       - main
-
 
 networks:
   main:

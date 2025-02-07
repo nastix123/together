@@ -21,6 +21,7 @@ django-mptt = "^0.16.0"
 openpyxl = "^3.1.2"
 drf-standardized-errors = "^0.13.0"
 environ = "^1.0"
+mysqlclient = "^2.2.7"
 
 [build-system]
 requires = ["poetry-core"]
