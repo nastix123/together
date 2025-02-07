@@ -30,6 +30,7 @@ class ResponseSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('volunteer', 'created_at')
 
+
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=False)
     email = serializers.EmailField(required=False)
@@ -42,8 +43,8 @@ class UserLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Password is required.")
         return data
 
-    def create(self, validated_data):
-        user = authenticate(**validated_data)
+    def validate_credentials(self, username=None, email=None, password=None):
+        user = authenticate(username=username, password=password) if username else authenticate(email=email, password=password)
         if user is None:
             raise serializers.ValidationError("Invalid credentials.")
         return user
