@@ -93,7 +93,9 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-AUTH_USER_MODEL = "authentication.CustomUser"
+AUTH_USER_MODEL = "authentication.User"
+AUTHENTICATION_BACKENDS = ['authentication.backends.CustomAuthBackend']
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

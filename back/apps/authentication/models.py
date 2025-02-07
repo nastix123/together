@@ -1,103 +1,41 @@
-from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-
-from apps.authentication.permissions import UserPermissions
-from core.constants import AbsModel
+from django.core.exceptions import ValidationError
 
 
-class CustomManager(BaseUserManager):
-    def create_user(self, username, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", False)
-        extra_fields.setdefault("is_superuser", False)
-        extra_fields.setdefault("is_active", True)
-        return self._create_user(username, password, **extra_fields)
-
-    def create_superuser(self, username, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("is_active", True)
-        return self._create_user(username, password, **extra_fields)
-
-    def _create_user(self, username, password, **extra_fields):
-        user = self.model(username=username, **extra_fields)
-        user.password = make_password(password)
-        user.save(using=self._db)
-        return user
-
-
-class CustomUser(AbsModel, AbstractBaseUser, PermissionsMixin):
-    """Базовая модель user."""
-
-    first_name = models.TextField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name=_("first_name"),
-    )
-    last_name = models.TextField(
-        max_length=255, blank=True, null=True, verbose_name=_("last_name")
-    )
-    middle_name = models.TextField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name=_("middle_name"),
-    )
-    username = models.EmailField(
-        blank=True,
-        null=True,
-        unique=True,
-        verbose_name=_("email"),
-    )
-    phone = models.CharField(
-        blank=True,
-        null=True,
-        max_length=20,
-        unique=True,
-        verbose_name=_("phone"),
-    )
-    password = models.CharField(max_length=255)
-    appointment = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name=_("appointment"),
-    )
-    job_title = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        verbose_name=_("job_title"),
+class User(AbstractUser):
+    USER_TYPES = (
+        ('volunteer', 'Volunteer'),
+        ('needy', 'Needy'),
     )
 
-    is_active = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    username = models.CharField(max_length=150, unique=True, blank=True, null=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
+    phone = models.CharField(max_length=15, unique=True, blank=True, null=True)
+    user_type = models.CharField(max_length=10, choices=USER_TYPES)
 
-    USERNAME_FIELD = "username"
-    objects = CustomManager()
-    EMAIL_FIELD = "username"
+    def clean(self):
+        super().clean()
+        if not any([self.username, self.email, self.phone]):
+            raise ValidationError("At least one of username, email or phone must be set.")
 
-    def __str__(self):  # noqa ANN204
-        return (
-            f"{self.first_name}"
-            f"{self.last_name}"
-            f"{self.middle_name}"
-            f"{self.appointment}"
-            f"{self.job_title}"
-            f"{self.username}"
-            f"{self.phone}"
-            f"{self.is_active}"
-            f"{self.is_staff}"
-            f"{self.is_superuser}"
-        )
 
-    class Meta:
-        db_table = "users"
-        verbose_name = _("user")
-        verbose_name_plural = _("users")
-        default_permissions = []
-        permissions = UserPermissions.choices
+class Request(models.Model):
+    STATUS_CHOICES = (
+        ('open', 'Open'),
+        ('in_progress', 'In Progress'),
+        ('closed', 'Closed'),
+    )
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='requests')
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='open')
+
+
+class Response(models.Model):
+    request = models.ForeignKey(Request, on_delete=models.CASCADE, related_name='responses')
+    volunteer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='responses')
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_accepted = models.BooleanField(default=False)

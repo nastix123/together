@@ -2,9 +2,7 @@ from datetime import timedelta
 
 from cryptography.hazmat.primitives import serialization
 
-from apps.authentication.permissions import UserPermissions
 from core.env import env
-from core.utils.permissions_utils import CheckPermissions
 
 DOMAIN = env.str("DOMAIN")
 SITE_NAME = env.str("SITE_NAME")
@@ -17,9 +15,6 @@ DJOSER = {
     "SERIALIZERS": {
         "user_create": "apps.authentication.serializers.UserCreateSerializer",
         "current_user": "apps.authentication.serializers.UserMeSerializer",
-    },
-    "PERMISSIONS": {
-        "user_create": (CheckPermissions(UserPermissions.create_user),),
     },
 }
 

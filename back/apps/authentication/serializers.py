@@ -1,88 +1,29 @@
 from rest_framework import serializers
+from .models import User, Request, Response
 
-from apps.authentication.groups.serializers import GroupSerializer
-from apps.authentication.models import CustomUser
-
-
-class UserSerializer(serializers.ModelSerializer):
-    groups = GroupSerializer(many=True, read_only=True)
-
+class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
-        read_only_fields = ("id",)
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-            "middle_name",
-            "username",
-            "is_active",
-            "phone",
-            "appointment",
-            "job_title",
-            "groups",
-        )
+        model = User
+        fields = ('username', 'email', 'phone', 'password', 'user_type')
+        extra_kwargs = {'password': {'write_only': True}}
 
+    def validate(self, data):
+        if not any([data.get('username'), data.get('email'), data.get('phone')]):
+            raise serializers.ValidationError("At least one of username, email or phone is required.")
+        return data
 
-class UserUpdateSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
+class RequestSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
-        read_only_fields = ("id",)
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-            "middle_name",
-            "username",
-            "is_active",
-            "phone",
-            "appointment",
-            "job_title",
-            "groups",
-        )
+        model = Request
+        fields = '__all__'
+        read_only_fields = ('author', 'created_at')
 
-
-class UserCreateSerializer(serializers.ModelSerializer):
+class ResponseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
-        read_only_fields = ("id",)
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-            "middle_name",
-            "username",
-            "is_active",
-            "phone",
-            "appointment",
-            "job_title",
-        )
-
-
-class UserMeSerializer(serializers.ModelSerializer):
-    groups = GroupSerializer(many=True, read_only=True)
-    permissions = serializers.SerializerMethodField()
-
-    class Meta:
-        model = CustomUser
-        read_only_fields = (
-            "id",
-            "phone",
-            "appointment",
-            "job_title",
-        )
-
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-            "middle_name",
-            "phone",
-            "appointment",
-            "job_title",
-            "groups",
-            "permissions",
-        )
-
-    def get_permissions(self, obj):
-        return [perm.split(".")[1] for perm in obj.get_group_permissions()]
+        model = Response
+        fields = '__all__'
+        read_only_fields = ('volunteer', 'created_at')
