@@ -1,43 +1,21 @@
-# Base stage
-FROM python:3.11-slim as base
+# Use the official Python image as a base image
+FROM python:3.11-slim
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    APPDIR=/opt/app
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-WORKDIR $APPDIR
-
-# Poetry installation stage
-FROM base as poetry
-
-ENV POETRY_VERSION=1.4.0 \
-    POETRY_HOME=/opt/poetry \
-    PATH="$POETRY_HOME/bin:$PATH"
+WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y gcc curl && \
-    curl --retry 10 --max-time 2 -sSL https://install.python-poetry.org | python3 -
+    apt-get install -y gcc pkg-config libmariadb-dev && \
+    apt-get clean
 
-# Requirements building stage
-FROM poetry as requirements-builder
+COPY requirements.txt .
 
-COPY pyproject.toml poetry.lock ./
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
-
-# Final stage
-FROM base as final
-
-RUN apt-get update && \
-    apt-get install -y git && \
-    pip install --upgrade pip
-
-WORKDIR $APPDIR
-
-COPY --from=requirements-builder $APPDIR/requirements.txt .
-RUN pip install -r requirements.txt && \
-    pip install --index-url https://nexus.intechs.by/repository/pypi-proxy/simple -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-COPY gunicorn.conf.py .
 
-CMD ["bash", "-c", "python manage.py migrate && gunicorn core.wsgi"]
+CMD bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8001"

@@ -16,18 +16,24 @@ services:
       - db:/var/lib/mysql
     networks:
       - main
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=together" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
 
   auth:
     build: .
     container_name: together_auth
     restart: always
     ports:
-      - "8585:8001"
+      - "8001:8001"
     env_file:
       - .env
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     volumes:
       - .:/opt/app/
     networks:
