@@ -32,20 +32,24 @@ class ResponseSerializer(serializers.ModelSerializer):
 
 
 class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField(required=False)
-    email = serializers.EmailField(required=False)
+    login = serializers.CharField()
     password = serializers.CharField(write_only=True)
 
     def validate(self, data):
-        print(180 * ")))")
-        if not data.get('username') and not data.get('email'):
-            raise serializers.ValidationError("Either username or email is required.")
-        if not data.get('password'):
-            raise serializers.ValidationError("Password is required.")
-        return data
+        login = data.get('login')
+        password = data.get('password')
 
-    def validate_credentials(self, username=None, email=None, password=None):
-        user = authenticate(username=username, password=password) if username else authenticate(email=email, password=password)
-        if user is None:
+        if not login or not password:
+            raise serializers.ValidationError("Both login and password are required.")
+
+        user = authenticate(
+            request=self.context.get('request'),
+            username=login,
+            password=password
+        )
+
+        if not user:
             raise serializers.ValidationError("Invalid credentials.")
-        return user
+
+        data['user'] = user
+        return data

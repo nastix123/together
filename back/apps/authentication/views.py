@@ -3,6 +3,7 @@ from rest_framework import viewsets, permissions
 from .models import RequestModel, ResponseModel, User
 from .serializers import RequestSerializer, ResponseSerializer, UserLoginSerializer
 from .permissions import IsNeedy, IsVolunteer
+from django.contrib.auth import login
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -45,14 +46,15 @@ class UserLoginView(viewsets.ViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = UserLoginSerializer
 
+    @method_decorator(csrf_exempt)
     def create(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
-        print("180 * " * 180)
-        username = serializer.validated_data.get('username')
-        email = serializer.validated_data.get('email')
-        password = serializer.validated_data.get('password')
-
-        user = serializer.validate_credentials(username, email, password)
-
-        return Response({"message": "Login successful", "user": user.username}, status=status.HTTP_200_OK)
+        user = serializer.validated_data['user']
+        login(request, user)
+        return Response({
+            "message": "Login successful",
+            "user": user.username,
+            "email": user.email,
+            "user_type": user.user_type
+        }, status=status.HTTP_200_OK)

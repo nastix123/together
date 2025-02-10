@@ -3,6 +3,7 @@ import environ
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
+
 env = environ.Env(DEBUG=(bool, False))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_standardized_errors",
     #
-    'apps.authentication.AuthenticationConfig',
+    'apps.authentication',
 ]
 
 MIDDLEWARE = [
@@ -93,9 +94,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-AUTH_USER_MODEL = "authentication.User"
-AUTHENTICATION_BACKENDS = ['authentication.backends.CustomAuthBackend']
+AUTHENTICATION_BACKENDS = [
+    'apps.authentication.backends.CustomAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 
 # Internationalization
@@ -135,3 +137,4 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR.parent, "templates"),)
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 from .libs import *  # noqa: E402  F403
+# import apps.authentication.backends

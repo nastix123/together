@@ -14,6 +14,17 @@ class User(AbstractUser):
     phone = models.CharField(max_length=15, unique=True, blank=True, null=True)
     user_type = models.CharField(max_length=10, choices=USER_TYPES)
 
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_set',
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_permissions_set',
+        blank=True,
+    )
+
     def clean(self):
         super().clean()
         if not any([self.username, self.email, self.phone]):
