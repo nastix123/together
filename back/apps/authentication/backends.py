@@ -12,14 +12,19 @@ class CustomAuthBackend(ModelBackend):
                 Q(email=username) |
                 Q(phone=username)
             )
-            if user.check_password(password):
+            if user.check_password(password) and self.user_can_authenticate(user):
                 return user
         except UserModel.DoesNotExist:
             return None
         except UserModel.MultipleObjectsReturned:
-            return UserModel.objects.filter(
+            user = UserModel.objects.filter(
                 Q(username=username) |
                 Q(email=username) |
                 Q(phone=username)
             ).first()
+            if user and user.check_password(password) and self.user_can_authenticate(user):
+                return user
         return None
+
+    def user_can_authenticate(self, user):
+        return user.is_active

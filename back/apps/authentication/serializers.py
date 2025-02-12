@@ -51,5 +51,12 @@ class UserLoginSerializer(serializers.Serializer):
         if not user:
             raise serializers.ValidationError("Invalid credentials.")
 
+        if not user.is_active:
+            raise serializers.ValidationError("User account is disabled.")
+
         data['user'] = user
         return data
+
+    def create(self, validated_data):
+        # Method required for DRF, but not used
+        pass

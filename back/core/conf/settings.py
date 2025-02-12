@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "django_filters",
     "drf_standardized_errors",
+    'rest_framework.authtoken',
     #
     'apps.authentication',
 ]
