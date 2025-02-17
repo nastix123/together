@@ -19,15 +19,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkUserStatus() async {
-
     final storedUser = await loadUserFromStorage();
 
-    
     setState(() {
       currentUser = storedUser;
     });
 
-  
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -40,22 +37,20 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(), 
+        child: CircularProgressIndicator(),
       ),
     );
   }
 }
 
 Future<User?> loadUserFromStorage() async {
-  
   await Future.delayed(const Duration(seconds: 2));
   return User(
     id: '123',
-    role: Role.UNKNOWN, 
+    role: Role.UNKNOWN,
     name: 'John',
     surname: 'Doe',
     city: 'Minsk',
     email: 'john.doe@example.com',
   );
 }
-

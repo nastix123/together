@@ -7,7 +7,6 @@ import 'package:together/src/presentation/registration/ui/registration.dart';
 import 'package:together/src/presentation/registration/ui/splash.dart';
 import 'settings/settings_controller.dart';
 
-
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
@@ -42,11 +41,11 @@ class MyApp extends StatelessWidget {
           routes: {
             '/register': (context) => RegistrationScreen(),
             '/announcements': (context) => const AnnouncementsScreen(),
-            '/create_announcement': (context) => const CreateAnnouncementScreen()
-        },
+            '/create_announcement': (context) =>
+                const CreateAnnouncementScreen()
+          },
         );
       },
     );
   }
 }
-
