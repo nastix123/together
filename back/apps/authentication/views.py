@@ -1,15 +1,21 @@
 from rest_framework import viewsets, permissions
 
-from .models import RequestModel, ResponseModel, User
-from .serializers import RequestSerializer, ResponseSerializer, UserLoginSerializer
+from rest_framework import mixins
+from core.views import AbsCRUDView
+from .models import RequestModel, ResponseModel, Custom_User
+from .serializers import RequestSerializer, ResponseSerializer, RegistrationUserSerializer, \
+    GroupSerializer, CreateUserSerializer
 from .permissions import IsNeedy, IsVolunteer
+from django.contrib.auth.models import Group
+from drf_spectacular.utils import extend_schema
 
 from rest_framework.response import Response
-from rest_framework import status
-from .serializers import UserRegistrationSerializer
-
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import action
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+from djoser.views import UserViewSet
 
 
 class RequestViewSet(viewsets.ModelViewSet):
@@ -30,43 +36,53 @@ class ResponseViewSet(viewsets.ModelViewSet):
         serializer.save(volunteer=self.request.user)
 
 
-class UserRegistrationView(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserRegistrationSerializer
-    permission_classes = [permissions.AllowAny]
+class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = Custom_User.objects.all()
+    serializer_class = RegistrationUserSerializer
 
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        password = serializer.validated_data["password"]
+        user = self.queryset.create(email=serializer.validated_data["email"], password=make_password(password))
+        user.is_active = True
+        user.save()
+        return Response({"status": "user maded"})
 
 
-class UserLoginView(viewsets.ViewSet):
-    permission_classes = [permissions.AllowAny]
-    serializer_class = UserLoginSerializer
-
-    def create(self, request):
-        serializer = self.serializer_class(
-            data=request.data,
-            context={'request': request}
-        )
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-
-        return Response({
-            "token": token.key,
-            "user_id": user.pk,
-            "email": user.email,
-            "user_type": user.user_type
-        }, status=status.HTTP_200_OK)
+class Custom_UserViewSet(AbsCRUDView):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Custom_User.objects.prefetch_related("groups")
+    serializer_class = CreateUserSerializer
+    http_method_names = ["get", "post", "put", "head", "options"]
 
 
-class UserLogoutView(viewsets.ViewSet):
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all().order_by('name')
+    serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    @action(detail=False, methods=['post'])
-    def logout(self, request):
-        request.user.auth_token.delete()
-        return Response({"detail": "Successfully logged out."}, status=status.HTTP_200_OK)
+
+@extend_schema(tags=["auth: user"])
+class CreateTokenView(TokenObtainPairView):
+    pass
+
+
+@extend_schema(tags=["auth: user"])
+class RefreshTokenView(TokenRefreshView):
+    pass
+
+
+@extend_schema(tags=["auth: user"])
+class VerifyTokenView(TokenVerifyView):
+    pass
+
+
+@extend_schema(tags=["auth: user"])
+class DjoserUserViewSet(UserViewSet):
+    pass

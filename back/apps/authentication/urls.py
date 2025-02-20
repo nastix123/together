@@ -1,16 +1,15 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from apps.authentication.views import RequestViewSet, ResponseViewSet, UserRegistrationView, UserLoginView, \
-    UserLogoutView
+from apps.authentication import views
+from apps.authentication.views import RequestViewSet, ResponseViewSet, Custom_UserViewSet
 
 router = DefaultRouter()
 router.register('requests', RequestViewSet)
 router.register('responses', ResponseViewSet)
-
+router.register(r'users', Custom_UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
-    path('register/', UserRegistrationView.as_view({'post': 'create'}), name='register'),
-    path('login/', UserLoginView.as_view({'post': 'create'}), name='login'),
-    path('logout/', UserLogoutView.as_view({'post': 'logout'}), name='logout'),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('', include(router.urls)),
 ]

@@ -7,12 +7,21 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+from apps.authentication.views import CreateTokenView, RefreshTokenView, VerifyTokenView, RegistrationViewSet
 from core.conf import settings
 from core.env import env
 
 urlpatterns = [
     path("api/v1/", include("api.v1")),
     path("admin/", admin.site.urls),
+    path("jwt/create/", CreateTokenView.as_view(), name="jwt-create"),
+    path("jwt/refresh/", RefreshTokenView.as_view(), name="jwt-refresh"),
+    path("jwt/verify/", VerifyTokenView.as_view(), name="jwt-verify"),
+    path(
+        "auth/register/",
+        RegistrationViewSet.as_view({"post": "create"}),
+        name="register",
+    ),
 ]
 
 if env.bool("DJANGO_ENABLE_SWAGGER", default=False):
