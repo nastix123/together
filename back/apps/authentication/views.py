@@ -44,7 +44,7 @@ class RegistrationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         password = serializer.validated_data["password"]
-        user = self.queryset.create(email=serializer.validated_data["email"], password=make_password(password))
+        user = self.queryset.create(phone=serializer.validated_data["phone"], password=make_password(password))
         user.is_active = True
         user.save()
         return Response({"status": "user maded"})
