@@ -1,4 +1,5 @@
 from rest_framework import viewsets, permissions
+from django.contrib.auth.hashers import make_password
 
 from rest_framework import mixins
 from core.views import AbsCRUDView
